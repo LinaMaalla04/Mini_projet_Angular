@@ -1,0 +1,27 @@
+<h2>Événements</h2>
+<p>Favoris : {{ favoritesCount() }}</p>
+
+<form>
+  <label>
+    Catégorie :
+    <select name="category" [(ngModel)]="selectedCategory">
+      @for (cat of categories(); track cat) {
+        <option [value]="cat">{{ cat }}</option>
+      }
+    </select>
+  </label>
+  <label>
+    Recherche :
+    <input type="text" name="search" [(ngModel)]="search" />
+  </label>
+</form>
+
+@for (event of filteredEvents(); track event.id) {
+  <app-event-card
+    [event]="event"
+    [isFavorite]="isFavorite(event.id)"
+    (favoriteToggled)="toggleFavorite($event)"
+  />
+} @empty {
+  <p>Aucun événement disponible</p>
+}

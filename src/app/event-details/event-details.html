@@ -1,0 +1,19 @@
+@if (event(); as ev) {
+  <h2>{{ ev.title }}</h2>
+  <p>Catégorie : {{ ev.category }}</p>
+  <p>Date : {{ ev.date | date: 'dd/MM/yyyy' }}</p>
+  <p>Lieu : {{ ev.place }}</p>
+  <p>
+    Prix :
+    @if (ev.price === 0) {
+      Gratuit
+    } @else {
+      {{ ev.price | currency: 'TND' : 'symbol' : '1.0-2' }}
+    }
+  </p>
+  <p>{{ ev.description }}</p>
+} @else {
+  <h2>Événement introuvable</h2>
+  <p>Aucun événement ne correspond à l'identifiant « {{ id() }} ».</p>
+}
+<p><a routerLink="/events">Retour aux événements</a></p>
